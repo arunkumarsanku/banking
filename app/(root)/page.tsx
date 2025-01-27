@@ -1,7 +1,7 @@
 import HeaderBox from '@/components/HeaderBox';
 import TotalBalanceBox from '@/components/TotalBalanceBox';
 import React from 'react';
-
+import 
 const Home = () => {
 
   const loggedIn = { firstName: 'Arun' };
