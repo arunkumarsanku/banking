@@ -4,6 +4,28 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
+
+import { z } from "zod"
+
+const formSchema = z.object({
+  username: z.string().min(2).max(50),
+    email: z.string().email(),
+    password: z.string().min(6).max(100),
+    confirmPassword: z.string().min(6).max(100),
+    phoneNumber: z.string().min(6).max(15),
+    dob: z.string().min(6).max(15),
+    address: z.string().min(6).max(100),
+    city: z.string().min(6).max(100),
+    state: z.string().min(6).max(100),
+    country: z.string().min(6).max(100),
+    postalCode: z.string().min(6).max(100),
+    accountNumber: z.string().min(6).max(100),
+    accountType: z.string().min(6).max(100),
+    accountBalance: z.string().min(6).max(100),
+    accountCurrency: z.string().min(6).max(100),
+    accountStatus: z.string().min(6).max(100)
+})
+
 const AuthForm = ({ type }: { type: string }) => {
 
     const [user, setUser] = useState(null)
