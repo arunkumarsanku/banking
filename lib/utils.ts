@@ -1,8 +1,9 @@
 /* eslint-disable no-prototype-builtins */
 import { type ClassValue, clsx } from "clsx";
 import qs from "query-string";
+import { use } from "react";
 import { twMerge } from "tailwind-merge";
-
+import { z } from "zod";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -193,3 +194,18 @@ export const getTransactionStatus = (date: Date) => {
 
   return date > twoDaysAgo ? "Processing" : "Success";
 };
+
+export const authFormSchema = (type :string) =>z.object({
+  // sign-up
+  firstName: type === 'sign-in' ? z.string() : z.string().min(2),
+  lastName: type === 'sign-in' ? z.string() : z.string().min(2),
+  address1: type === 'sign-in' ? z.string() : z.string().max(50),
+  city: type === 'sign-in' ? z.string() : z.string().max(50),
+  state: type === 'sign-in' ? z.string() : z.string().min(2).max(18),
+  postalCode: type === 'sign-in' ? z.string() : z.string().min(6).max(6),
+  dateOfBirth: type === 'sign-in' ? z.string() : z.string().min(2),
+  adharNumber: type === 'sign-in' ? z.string() : z.string().min(12).max(15),
+  // Both
+  email: z.string().email(),
+  password: z.string().min(8),
+});
