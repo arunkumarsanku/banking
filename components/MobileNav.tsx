@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sheet"
 import Image from 'next/image'
 import Link from 'next/link'
+import Footer from './Footer'
 
 const MobileNav = ({ user }: MobileNavProps) => {
     const pathname = usePathname();
@@ -26,7 +27,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
 
                 </SheetTrigger>
                 <SheetContent side="left" className="border-none bg-white">
-                    <Link href="/" className="cursor-pointer items-center gap-1 px-4 ">
+                    <Link href="/" className="cursor-pointer flex items-center gap-1 px-4 ">
                         <Image src="/icons/logo.svg" width={34} height={34} alt="Horizon logo" />
                         <h1 className="text-26 font-ibm-plex-serif font-bold text-black-1 ">Horizon</h1>
                     </Link>
@@ -34,7 +35,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
                         <SheetClose asChild>
                             <nav className="flex h-full flex-col gap-6 pt-16 text-white">
                                 {sidebarLinks.map((item) => {
-                                    const isActive = pathname === item.route || pathname.startsWith(`${item.route}`)
+                                    const isActive = pathname === item.route || pathname.startsWith(`${item.route}/`)
                                     return (
                                         <SheetClose asChild key={item.route}>
                                             <Link href={item.route} key={item.label} className={cn('mobilenav-sheet_close w-full', { 'bg-bank-gradient': isActive })}>
@@ -47,7 +48,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
                                 USER
                             </nav>
                         </SheetClose>
-                        FOOTER
+                        <Footer user={user} type = "mobile"/>
                     </div>
                 </SheetContent>
             </Sheet>

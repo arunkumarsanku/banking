@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
+import Footer from './Footer'
 
 const Sidebar = ({ user }: SiderbarProps) => {
     const pathname = usePathname();
@@ -20,10 +21,14 @@ const Sidebar = ({ user }: SiderbarProps) => {
                 </Link>
 
                 {sidebarLinks.map((item) => {
-                    const isActive = pathname === item.route || pathname.startsWith(`${item.route}`)
-                    return (<Link href={item.route} key={item.label} className={cn('sidebar-link', { 'bg-bank-gradient': isActive })}>
+
+                    const isActive = pathname === item.route || pathname.startsWith(`${item.route}/`)
+
+                    return (<Link href={item.route} key={item.label} 
+                    className={cn('sidebar-link', { 'bg-bank-gradient': isActive })}>
                         <div className="relative size-6">
-                            <Image src={item.imgURL} alt={item.label} fill className={cn({ 'brightness-[3] invert-0': isActive })} />
+                            <Image src={item.imgURL} alt={item.label} fill 
+                            className={cn({ 'brightness-[3] invert-0': isActive })} />
                         </div>
                         <p className={cn('sidebar-label', { '!text-white': isActive })}>{item.label}</p>
 
@@ -33,7 +38,7 @@ const Sidebar = ({ user }: SiderbarProps) => {
                 USER
             </nav>
 
-            FOOTER
+        <Footer  user ={user } type='mobile'/>
         </section>
     )
 }
